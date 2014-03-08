@@ -30,8 +30,9 @@ for src_file in src_file_list:
     src_file = os.path.join(src_path, src_file)
     if path.isfile(src_file):
         f = exif.exif(src_file)
+        app1_marker = f.detect_app1_marker()
         filetype = f.detect_filetype()
-        if filetype != 'unknown':
+        if app1_marker is True and filetype != 'unknown':
             name = f.read_tag_datetimeoriginal()
             dst_file = os.path.join(dst_path, name)
             #f.close()
